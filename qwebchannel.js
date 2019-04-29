@@ -72,6 +72,7 @@ var QWebChannel = function (transport, initCallback) {
 
     this.transport.onmessage = function (message) {
         var data = message.data;
+        console.warn(data);
         if (typeof data === "string") {
             data = JSON.parse(data);
         }

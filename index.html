@@ -8,20 +8,17 @@
     <script type="text/javascript">
         window.onload = function () {
             new QWebChannel(qt.webChannelTransport, function (channel) {
-                // 获取qt中绑定的交互对象
                 window.agent = channel.objects.agent
 
-                // js 绑定qt中的信号
                 channel.objects.agent.send_data_pack.connect(function (str) {
                     document.getElementById("div").innerHTML = str
                 });
-                // 按钮点击事件
+
                 document.getElementById("button").onclick = function () {
 
-                    // js调用qt中的方法
                     agent.data_pack_received(JSON.stringify({
                         slot: 'say_hello',
-                        data: 'world!'
+                        data: 'from JavaScript Function ~'
                     }))
                 };
 
@@ -32,7 +29,7 @@
 </head>
 
 <body>
-    <div id="div">sdkjfgdksfgjk</div>
+    <div id="div">PySide2 WebChannel Demo</div>
     <button id="button">sayHello</button>
 
 </body>

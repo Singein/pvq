@@ -1,6 +1,6 @@
 from PySide2.QtWidgets import QApplication
-from render import Render
 from PySide2.QtCore import Slot
+from render import Render
 import sys
 import os
 import time
@@ -9,12 +9,19 @@ import time
 class MainWindow(Render):
     def __init__(self):
         super().__init__()
-        # self.ui.webEngineView.loadFinished.connect(self.send)
+        self.init_connection()
 
-    # def send(self, ok):
-    #     if ok:
-    #         print('Load Finished!')
-    #         self.ui.bt
+    def init_connection(self):
+        self.ui.btn.clicked.connect(self.btn_clicked)
+        # 这里我在初始化的时候直接调用一次 btn的click()方法，模拟点击操作
+        # 注意观察JS的输出
+        self.ui.btn.click()
+
+    @Slot()
+    def btn_clicked(self):
+        print('Button Clicked!')
+        self.agent.send_data_pack.emit('Hello From PySide ~')
+        print('Signal Sended!')
 
 
 def say_hello(data):
